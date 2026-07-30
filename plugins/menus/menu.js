@@ -1,75 +1,158 @@
-import fs from 'fs'
+const handler = async (m, { conn }) => {
+  let menu = `👋🏻 𝖧𝗈𝗅𝖺! 𝖻𝗂𝖾𝗇𝗏𝖾𝗇𝗂𝖽𝗈 𝖺𝗅 𝗆𝖾𝗇𝗎𝗀𝗋𝗎𝗉𝗈 𝖽𝖾 *𝐘𝐀𝐈𝐑 𝐁𝐎𝐓 𝖨𝖠* 𝖺𝗾𝗎𝗂́ 𝖾𝗇𝖼𝗈𝗇𝗍𝗋𝖺𝗋𝖺́𝗌 𝗅𝗈𝗌 𝖼𝗈𝗆𝖺𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗆𝖺𝗇𝗍𝖾𝗇𝖾𝗋 𝗎𝗇 𝗍𝗈𝗍𝖺𝗅 𝗈𝗋𝖽𝖾𝗇 𝖽𝖾 𝗍𝗎́ 𝗀𝗋𝗎𝗉𝗈!
 
-let handler = async (m, { conn, args }) => {
+✮,— \`𝖨𝖭𝖥𝖮𝖱𝖬𝖠𝖢𝖨𝖮𝖭\` .ᐟᨮׁׅ֮.ᐟ
+⭒ ִֶָ७ ꯭🥤˙⋆｡ -𝗅𝗂𝖽
+⭒ ִֶָ७ ꯭🥤˙⋆｡ -𝗈𝗐𝗇𝖾𝗋
+⭒ ִֶָ७ ꯭🥤˙⋆｡ -𝗋𝖾𝗉𝗈𝗋𝗍𝖾
+⭒ ִֶָ७ ꯭🥤˙⋆｡ -𝗉𝗂𝗇𝗀
+⭒ ִֶָ७ ꯭🥤˙⋆｡ -𝗎𝗉𝗍𝗂𝗆𝖾
 
-  await conn.sendMessage(m.chat, { react: { text: '🔥', key: m.key } })
 
-  let d = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Mexico_City" }))
-  let locale = 'es'
-  let week = d.toLocaleDateString(locale, { weekday: 'long' })
-  let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
+✮,— \`𝖬𝖤𝖭𝖴𝖲 𝖣𝖨𝖲𝖯𝖮𝖭𝖨𝖡𝖫𝖤𝖲\` .ᐟᨮׁׅ֮.ᐟ
+  ৎ٠࣪⭑🍄𝄢 -𝗆𝖾𝗇𝗎
+  ৎ٠࣪⭑🍄𝄢 -𝗆𝖾𝗇𝗎𝖿𝖿
+  ৎ٠࣪⭑🍄𝄢 -𝗆𝖾𝗇𝗎𝗀𝗋𝗎𝗉𝗈𝗌
 
-  let hourNow = d.toLocaleTimeString('es-MX', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true
-  }).replace('a. m.', 'A.M').replace('p. m.', 'P.M')
 
-  let userId = m.mentionedJid?.[0] || m.sender
-  let user = global.db.data.users[userId]
+✮,— \`𝖯𝖠𝖱𝖠 𝖦𝖱𝖴𝖯𝖮𝖲\` .ᐟᨮׁׅ֮.ᐟ
+  ৎ٠࣪⭑🍜𝄢 -.𝗀𝗋𝗎𝗉𝗈 𝖺𝖻𝗋𝗂𝗋
+  ৎ٠࣪⭑🍜𝄢 -.𝗈𝗇 𝖺𝗇𝗍𝗂𝖺𝗋𝖺𝖻𝖾𝗌
+  ৎ٠࣪⭑🍜𝄢 -.𝗈𝗇 𝖺𝗇𝗍𝗂𝗅𝗂𝗇𝗄
+  ৎ٠࣪⭑🍜𝄢 -.𝗀𝗋𝗎𝗉𝗈 𝖼𝖾𝗋𝗋𝖺𝗋
+  ৎ٠࣪⭑🍜𝄢 -𝖽𝖾𝗅
+  ৎ٠࣪⭑🍜𝄢 -𝖽𝖾𝗆𝗈𝗍𝖾
+  ৎ٠࣪⭑🍜𝄢 -𝖿𝖺𝗇𝗍𝖺𝗌𝗆𝖺𝗌
+  ৎ٠࣪⭑🍜𝄢 -𝗸𝗶𝗰𝗸
+  ৎ٠࣪⭑🍜𝄢 -𝗸𝗶𝗰𝗸𝗳𝗮𝗻
+  ৎ٠࣪⭑🍜𝄢 -𝗹𝗶𝗻𝗸
+  ৎ٠࣪⭑🍜𝄢 -.𝗼𝗻 𝗺𝗼𝗱𝗼𝗮𝗱𝗺𝗶𝗻
+  ৎ٠࣪⭑🍜𝄢 -𝗺𝘂𝘁𝗲
+  ৎ٠࣪⭑🍜𝄢 -𝗡
+  ৎ٠࣪⭑🍜𝄢 -𝗽𝗿𝗼𝗺𝗼𝘁𝗲
+  ৎ٠࣪⭑🍜𝄢 -𝗿𝗲𝗴𝗹𝗮𝘀
+  ৎ٠࣪⭑🍜𝄢 -𝗿𝘂𝗹𝗲𝘁𝗮𝗯𝗮𝗻
+  ৎ٠࣪⭑🍜𝄢 -𝘀𝗲𝘁𝗳𝗼𝘁𝗼
+  ৎ٠࣪⭑🍜𝄢 -𝘀𝗲𝘁𝗶𝗻𝗳𝗼
+  ৎ٠࣪⭑🍜𝄢 -𝘀𝗲𝘁𝗻𝗮𝗺𝗲
+  ৎ٠࣪⭑🍜𝄢 -𝘀𝗲𝘁𝗿𝗲𝗴𝗹𝗮𝘀
+  ৎ٠࣪⭑🍜𝄢 -𝘀𝗲𝘁𝘄𝗲𝗹𝗰𝗼𝗺𝗲
+  ৎ٠࣪⭑🍜𝄢 -𝘁𝗼𝗱𝗼𝘀
+  ৎ٠࣪⭑🍜𝄢 -𝘂𝗻𝗯𝗮𝗻
+  ৎ٠࣪⭑🍜𝄢 -𝘂𝗻𝗺𝘂𝘁𝗲
+  ৎ٠࣪⭑🍜𝄢 -.𝗼𝗻 𝘄𝗲𝗹𝗰𝗼𝗺𝗲
 
-  let _uptime = process.uptime() * 1000
-  let uptime = clockString(_uptime)
 
-  let categories = {}
-  for (let plugin of Object.values(global.plugins)) {
-    if (!plugin.help || !plugin.tags) continue
-    for (let tag of plugin.tags) {
-      if (!categories[tag]) categories[tag] = []
-      categories[tag].push(...plugin.help.map(cmd => `.${cmd}`))
-    }
-  }
+*𐚁 ֹ ִ *𝖯𝖺𝗋𝖺 𝖥𝗋𝖾𝖾 𝖥𝗂𝗋𝖾* ୧👺 ֹ ִ*
+  ৎ٠࣪⭑🎮𝄢 -4𝘃𝘀4 𝗵𝗼𝗿𝗮 𝘆 𝗽𝗮𝗶𝘀
+  ৎ٠࣪⭑🎮𝄢 -6𝘃𝘀6 𝗵𝗼𝗿𝗮 𝘆 𝗽𝗮𝗶𝘀
+  ৎ٠࣪⭑🎮𝄢 -𝗰𝘂𝗮𝗱𝗿𝗶𝗹𝗮𝘁𝗲𝗿𝗼 𝗵𝗼𝗿𝗮 𝘆 𝗽𝗮𝗶𝘀
+  ৎ٠࣪⭑🎮𝄢  𝗵𝗲𝘅𝗮𝗴𝗼𝗻𝗮𝗹 𝗵𝗼𝗿𝗮 𝘆 𝗽𝗮𝗶𝘀
+  ৎ٠࣪⭑🎮𝄢 -𝗶𝗻𝘁𝗲𝗿𝗻𝗮 𝗵𝗼𝗿𝗮 𝘆 𝗽𝗮𝗶𝘀
+  ৎ٠࣪⭑🎮𝄢 -𝘀𝗰𝗿𝗶𝗺 𝗵𝗼𝗿𝗮 𝘆 𝗽𝗮𝗶𝘀
 
-  let menuText = `
-\`\`\`${week}, ${date}
-${hourNow} 𝖬𝖾𝗑𝗂𝖼𝗈 𝖢𝗂𝗍𝗒\`\`\`
 
-👋🏻 Hola @${userId.split('@')[0]} 𝖬𝖾 𝖫𝗅𝖺𝗆𝗈 ${global.namebot}, 𝖤𝗌𝗉𝖾𝗋𝗈 𝖰𝗎𝖾 𝖲𝖾𝖺 𝖣𝖾 𝖬𝗎𝖼𝗁𝖺 𝖴𝗍𝗂𝗅𝗂𝖽𝖺𝖽 🏞️
+*𐚁 ֹ ִ *𝖣𝖾𝗌𝖼𝖺𝗋𝗀𝖺𝖽𝗈𝗋𝖾𝗌* ୧📥 ֹ ִ*
+  ৎ٠࣪⭑🌴𝄢 𝗳𝗯
+  ৎ٠࣪⭑🌴𝄢 -𝗶𝗴
+  ৎ٠࣪⭑🌴𝄢 -𝗺𝗲𝗱𝗶𝗮𝗳𝗶𝗿𝗲
+  ৎ٠࣪⭑🌴𝄢 -𝗽𝗹𝗮𝘆
+  ৎ٠࣪⭑🌴𝄢 -𝗽𝗹𝗮𝘆2
+  ৎ٠࣪⭑🌴𝄢 -𝗽𝗹𝗮𝘆𝗽𝗿𝗼
+  ৎ٠࣪⭑🌴𝄢 -𝘀𝗽𝗼𝘁𝗶𝗳𝘆
+  ৎ٠࣪⭑🌴𝄢 -𝘄𝗵𝗮𝘁𝗺𝘂𝘀𝗶𝗰
+  ৎ٠࣪⭑🌴𝄢 -𝘆𝘁𝗺𝗽3
+  ৎ٠࣪⭑🌴𝄢 -𝘆𝘁𝗺𝗽4
 
-𝖳𝗂𝖾𝗆𝗉𝗈 𝖠𝖼𝗍𝗂𝗏𝗈: ${uptime} 🏞️
-`.trim()
 
-  for (let [tag, cmds] of Object.entries(categories)) {
-    let tagName = tag.toUpperCase().replace(/_/g, ' ')
-    menuText += `
+*𐚁 ֹ ִ *𝖧𝖾𝗋𝗋𝖺𝗆𝗂𝖾𝗇𝗍𝖺𝗌* ୧🛠 ֹ ִ*
+  ৎ٠࣪⭑🔧𝄢 -ver
+  ৎ٠࣪⭑🔧𝄢 -img
 
-╭─── ${tagName} ──╮
-${cmds.map(cmd => `⭒ ִֶָ७ ꯭🚩˙⋆｡ - ${cmd}`).join('\n')}
-╰──────────╯`
-  }
+
+*𐚁 ֹ ִ *𝖬𝗂𝗇𝗂 𝖩𝗎𝖾𝗀𝗈𝗌* ୧🎮 ֹ ִ*
+  ৎ٠࣪⭑🧩𝄢 -acertijo
+  ৎ٠࣪⭑🧩𝄢 -cachuda
+  ৎ٠࣪⭑🧩𝄢 -cachudo
+  ৎ٠࣪⭑🧩𝄢 -casar
+  ৎ٠࣪⭑🧩𝄢 -divorcio
+  ৎ٠࣪⭑🧩𝄢 -enana
+  ৎ٠࣪⭑🧩𝄢 -enano
+  ৎ٠࣪⭑🧩𝄢 -fea
+  ৎ٠࣪⭑🧩𝄢 -feo
+  ৎ٠࣪⭑🧩𝄢 -gay
+  ৎ٠࣪⭑🧩𝄢 -juegos
+  ৎ٠࣪⭑🧩𝄢 -kiss
+  ৎ٠࣪⭑🧩𝄢 -lesbiana
+  ৎ٠࣪⭑🧩𝄢 -manca
+  ৎ٠࣪⭑🧩𝄢 -manco
+  ৎ٠࣪⭑🧩𝄢 -matrimonios
+  ৎ٠࣪⭑🧩𝄢 -meme
+  ৎ٠࣪⭑🧩𝄢 -negra
+  ৎ٠࣪⭑🧩𝄢 -negro
+  ৎ٠࣪⭑🧩𝄢 -pajera
+  ৎ٠࣪⭑🧩𝄢 -pajero
+  ৎ٠࣪⭑🧩𝄢 -pareja
+  ৎ٠࣪⭑🧩𝄢 -personalidad
+  ৎ٠࣪⭑🧩𝄢 -peruana
+  ৎ٠࣪⭑🧩𝄢 -peruano
+  ৎ٠࣪⭑🧩𝄢 -poema
+  ৎ٠࣪⭑🧩𝄢 -ppt
+  ৎ٠࣪⭑🧩𝄢 -puta
+  ৎ٠࣪⭑🧩𝄢 -puto
+  ৎ٠࣪⭑🧩𝄢 -rata
+  ৎ٠࣪⭑🧩𝄢 -ship
+  ৎ٠࣪⭑🧩𝄢 -pegar
+  ৎ٠࣪⭑🧩𝄢 -verdad
+
+
+*𐚁 ֹ ִ *𝖨𝖠* ୧🫀 ֹ ִ*
+  ৎ٠࣪⭑🔍𝄢 -dalle
+  ৎ٠࣪⭑🔍𝄢 -gemini
+  ৎ٠࣪⭑🔍𝄢 -imagen
+  ৎ٠࣪⭑🔍𝄢 -luminai
+  ৎ٠࣪⭑🔍𝄢 -pixai
+  ৎ٠࣪⭑🔍𝄢 -tts
+  ৎ٠࣪⭑🔍𝄢 -visión
+  ৎ٠࣪⭑🔍𝄢 -vision2
+
+
+*𐚁 ֹ ִ *𝖲𝗍𝗂𝖼𝗄𝖾𝗋𝗌* ୧🎭 ֹ ִ*
+  ৎ٠࣪⭑🎨𝄢 -tourl
+  ৎ٠࣪⭑🎨𝄢 -brat
+  ৎ٠࣪⭑🎨𝄢 -mixemoji
+  ৎ٠࣪⭑🎨𝄢 -qc
+  ৎ٠࣪⭑🎨𝄢 -s
+
+*𐚁 ֹ ִ *𝖯𝖺𝗋𝖺 𝖾𝗅 𝖼𝗋𝖾𝖺𝖽𝗈𝗋* ୧👑 ֹ ִ*
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝘁𝗶𝗲𝗺𝗽𝗼 𝗮𝗰𝘁𝗶𝗰𝗼
+  ৎ٠࣪⭑👨🏻‍💻𝄢 .𝗼𝗻 𝗮𝗻𝘁𝗶𝗽𝗿𝗶𝘃𝗮𝗱𝗼
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝗮𝘂𝘁𝗼𝗮𝗱𝗺𝗶𝗻
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝗮𝘃𝗶𝘀𝗼
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝘀𝗲𝘁𝗯𝗼𝘁𝗳𝗼𝘁𝗼
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝘀𝗲𝘁𝗯𝗼𝘁𝗻𝗮𝗺𝗲
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝗷𝗼𝗶𝗻
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝗹𝗶𝘀𝘁𝗮 𝗴𝗿𝘂𝗽𝗼𝘀
+  ৎ٠࣪⭑👨🏻‍💻𝄢 -𝗿𝗲𝘀𝘁𝗮𝗿𝘁
+
+> © 𝐘𝐀𝐈𝐑 𝐁𝐎𝐓 𝖨𝖠 𝖝 𝐇𝐄𝐑𝐍𝐀𝐍𝐃𝐄𝐙-𝗑𝗒𝗓
+`
+
+  await conn.sendMessage(m.chat, {
+    react: { text: '🧾', key: m.key }
+  })
 
   await conn.sendMessage(
     m.chat,
     {
-      image: { url: global.banner },
-      caption: menuText,
-      contextInfo: {
-        mentionedJid: [userId]
-      }
+      image: { url: "https://files.catbox.moe/901j7x.jpg" },
+      caption: menu,
+      mentions: [m.sender]
     },
     { quoted: m }
   )
 }
 
-handler.command = ['menu', 'menú', 'help', 'menuall']
-handler.help = ["𝖬𝖾𝗇𝗎𝖺𝗅𝗅"]
-handler.tags = ["𝖬𝖤𝖭𝖴𝖲"]
-
-export default handler
-
-function clockString(ms) {
-  let h = Math.floor(ms / 3600000)
-  let m = Math.floor(ms / 60000) % 60
-  let s = Math.floor(ms / 1000) % 60
-  return `${h}h ${m}m ${s}s`
-}
+handler.customPrefix = /^\.?(menu|menuall)$/i;
+handler.command = new RegExp;
+export default handler;
