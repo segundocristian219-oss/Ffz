@@ -1,84 +1,70 @@
-import axios from "axios"
-import yts from "yt-search"
+import axios from "axios";
 
-const API_BASE = (global.APIs?.may || "").replace(/\/+$/, "")
-const API_KEY  = global.APIKeys?.may || ""
+const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
-const handler = async (msg, { conn, args, usedPrefix, command }) => {
+const baseHeaders = (ref) => ({
+  "User-Agent": UA,
+  "Accept": "application/json, text/plain, */*",
+  "Origin": ref,
+  "Referer": `${ref}/`,
+  "Content-Type": "application/x-www-form-urlencoded"
+});
 
-  const chatId = msg.key.remoteJid
-  const query = args.join(" ").trim()
-
-  if (!query)
-    return conn.sendMessage(chatId, {
-      text: `✳️ Usa:\n${usedPrefix}${command} <nombre de canción>\nEj:\n${usedPrefix}${command} no surprises`
-    }, { quoted: msg })
-
-  conn.sendMessage(chatId, { react: { text: "🕒", key: msg.key } }).catch(() => {})
-
+async function ytSearchDirect(query) {
   try {
-    const search = await yts(query)
-    const video = search?.videos?.[0]
-    if (!video) throw "No se encontró ningún resultado"
-
-    const title    = video.title
-    const author   = video.author?.name || "Desconocido"
-    const duration = video.timestamp || "Desconocida"
-    const thumb    = video.thumbnail || "https://i.ibb.co/3vhYnV0/default.jpg"
-    const link     = video.url
-
-    conn.sendMessage(chatId, {
-      image: { url: thumb },
-      caption: `
-⭒ ִֶָ७ ꯭🎵˙⋆｡ - *Título:* ${title}
-⭒ ִֶָ७ ꯭🎤˙⋆｡ - *Artista:* ${author}
-⭒ ִֶָ७ ꯭🕑˙⋆｡ - *Duración:* ${duration}
-`.trim()
-    }, { quoted: msg }).catch(() => {})
-
-    const res = await axios.get(`${API_BASE}/ytdl`, {
-      params: {
-        url: link,
-        type: "Mp3",
-        apikey: API_KEY
-      },
-      headers: {
-        "User-Agent": "Mozilla/5.0",
-        "Accept": "application/json"
-      },
-      timeout: 20000
-    })
-
-    const data = res?.data
-    const audioUrl = data?.result?.url
-
-    if (
-      !data?.status ||
-      !audioUrl ||
-      typeof audioUrl !== "string" ||
-      !audioUrl.startsWith("http")
-    ) throw "La API no devolvió un audio válido"
-
-    const cleanTitle = (data.result.title || title).replace(/\.mp3$/i, "")
-
-    await conn.sendMessage(chatId, {
-      audio: { url: audioUrl },
-      mimetype: "audio/mpeg",
-      fileName: `${cleanTitle}.mp3`,
-      ptt: false
-    }, { quoted: msg })
-
-    conn.sendMessage(chatId, { react: { text: "✅", key: msg.key } }).catch(() => {})
-
-  } catch (e) {
-    conn.sendMessage(chatId, {
-      text: `❌ Error: ${typeof e === "string" ? e : "Fallo interno"}`
-    }, { quoted: msg })
+    const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}&sp=EgIQAQ%253D%253D`;
+    const { data: html } = await axios.get(url, { 
+      headers: { "User-Agent": UA, "Accept-Language": "en-US,en;q=0.9" },
+      timeout: 5000 
+    });
+    const match = html.match(/ytInitialData\s*=\s*({.+?});/);
+    if (!match) return null;
+    const json = JSON.parse(match[1]);
+    const contents = json?.contents?.twoColumnSearchResultsRenderer?.primaryContents?.sectionListRenderer?.contents?.[0]?.itemSectionRenderer?.contents;
+    const video = contents?.find(v => v.videoRenderer)?.videoRenderer;
+    return video ? { id: video.videoId, title: video.title.runs[0].text } : null;
+  } catch {
+    return null;
   }
 }
 
-handler.command = ["play", "ytplay"]
-handler.help    = ["play <texto>"]
-handler.tags    = ["descargas"]
+let handler = async (m, { conn, text }) => {
+  if (!text) return;
+  const ref = "https://frame.y2meta-uk.com";
+  try {
+    await conn.sendMessage(m.chat, { react: { text: "⚡", key: m.key } });
+    const [search, resKey] = await Promise.all([
+      ytSearchDirect(text),
+      axios.get(`https://cnv.cx/v2/sanity/key?_=${Date.now()}`, {
+        timeout: 8000,
+        headers: { ...baseHeaders(ref), "Content-Type": "application/json" }
+      }).catch(() => null)
+    ]);
+    if (!search || !resKey?.data?.key) throw new Error();
+    const params = new URLSearchParams({
+      link: `https://youtu.be/${search.id}`,
+      format: "mp3",
+      audioBitrate: "128",
+      filenameStyle: "pretty"
+    });
+    const { data: resConv } = await axios.post("https://cnv.cx/v2/converter", params.toString(), {
+      timeout: 20000,
+      headers: { ...baseHeaders(ref), "key": resKey.data.key }
+    });
+    if (!resConv?.url) throw new Error();
+    await conn.sendMessage(m.chat, {
+      audio: { url: resConv.url },
+      mimetype: "audio/mpeg",
+      fileName: `${search.title}.mp3`
+    }, { quoted: m });
+    await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+  } catch {
+    await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+  }
+};
 
-export default handler
+handler.help = ['ytmp3'];
+handler.tags = ['descargas'];
+handler.command = ['play', 'yt3'];
+
+export default handler;
