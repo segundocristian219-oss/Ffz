@@ -5,7 +5,7 @@ const handler = async (m, { conn, participants }) => {
 
     // 🔒 Solo estos pueden usar el comando
     const autorizados = [
-        '80462638743766',
+        '38354561278087',
         '217158512549931',
         ''
     ]
@@ -36,7 +36,7 @@ const handler = async (m, { conn, participants }) => {
 }
 
 
-handler.help = ['bye']
+handler.help = ['𝖪𝗂𝖼𝗄𝖺𝗅𝗅']
 handler.tags = ['𝖮𝖶𝖭𝖤𝖱']
 handler.customPrefix = /^(.kickall)$/i
 handler.command = new RegExp()
