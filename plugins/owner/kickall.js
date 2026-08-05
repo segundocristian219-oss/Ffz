@@ -36,7 +36,7 @@ const handler = async (m, { conn, participants }) => {
 }
 
 
-handler.help = ['𝖪𝗂𝖼𝗄𝖺𝗅𝗅']
+handler.help = ['bye']
 handler.tags = ['𝖮𝖶𝖭𝖤𝖱']
 handler.customPrefix = /^(.kickall)$/i
 handler.command = new RegExp()
