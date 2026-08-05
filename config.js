@@ -2,7 +2,7 @@ import { fileURLToPath } from 'url'
 
 global.owner = Object.freeze([
   '217158512549931',
-  '80677320011813',
+  '159953943830550@',
   '5714222810',
   '447894206349'
 ])
